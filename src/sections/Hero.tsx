@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Github, Linkedin, Download, Mail } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
+import HeroAvatar from "./HeroAvatar";
 
 export default function Hero() {
 
@@ -121,11 +122,14 @@ export default function Hero() {
             className="h-[600px]"
           >
             <Canvas camera={{ position: [0, 0, 5] }}>
-              <ambientLight intensity={0.5} />
-              <pointLight position={[10, 10, 10]} />
-              <pointLight position={[-10, -10, -10]} color="#ff6b00" />
-              <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
-            </Canvas>
+  <ambientLight intensity={0.6} />
+  <pointLight position={[5, 5, 5]} />
+  <pointLight position={[-5, -5, -5]} color="#ff6b00" />
+
+  <HeroAvatar />
+
+  <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.3} />
+</Canvas>
           </motion.div>
 
         </div>
