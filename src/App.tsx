@@ -9,6 +9,7 @@ import Contact from './sections/Contact';
 import useCinematicScroll from './hooks/useCinematicScroll';
 import useMouseParallax from "./hooks/useMouseParallax";
 import Certifications from "./sections/Certifications";
+import ThemeSwitcher from "./components/ThemeSwitcher";
 
 function App() {
   useSmoothScroll();
@@ -16,18 +17,25 @@ function App() {
   useMouseParallax();
 
   return (
-     <div id="main-container" className="bg-black text-white">
-      <Navbar />
-      <main>
-        <Hero />
-        <Services />
-        <About />
-        <Portfolio />
-        <Certifications />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <>
+      {/* 🔥 FLOATING THEME SWITCHER */}
+      <ThemeSwitcher />
+
+      <div id="main-container" className="w-full bg-black text-white transition-colors duration-300">
+        <Navbar />
+
+        <main>
+          <Hero />
+          <Services />
+          <About />
+          <Portfolio />
+          <Certifications />
+          <Contact />
+        </main>
+
+        <Footer />
+      </div>
+    </>
   );
 }
 

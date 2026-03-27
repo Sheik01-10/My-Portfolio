@@ -7,6 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function useCinematicScroll(): void {
   useEffect(() => {
     const ctx = gsap.context(() => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
 
       // 🔥 MAIN TIMELINE
       const tl = gsap.timeline({
@@ -36,7 +37,7 @@ export default function useCinematicScroll(): void {
 
       // 🎬 SERVICES HOLD
       tl.to("#services", {
-        scale: 0.95,
+        scale: 1,
         duration: 0.5,
       });
 

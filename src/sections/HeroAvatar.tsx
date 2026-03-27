@@ -6,61 +6,65 @@ import * as THREE from "three";
 export default function HeroAvatar() {
   const ref = useRef<any>(null);
 
-  // ✅ LOAD IMAGE TEXTURE INSIDE COMPONENT
   const texture = useLoader(THREE.TextureLoader, "/profile.jpg");
 
   useFrame(() => {
     if (ref.current) {
-      ref.current.rotation.y += 0.003;
+      ref.current.rotation.y += 0.002; // 🔥 smoother + less vanish
     }
   });
 
   return (
     <group ref={ref}>
 
-      {/* 🧍 PROFILE IMAGE (PURE 3D — NO BOX 🔥) */}
-      <Float speed={1.2} rotationIntensity={0.4} floatIntensity={1.2}>
+      {/* 🧍 PROFILE IMAGE */}
+      <Float speed={1.2} rotationIntensity={0.3} floatIntensity={1.2}>
         <mesh>
-          <circleGeometry args={[2.0, 50]} />
-          <meshBasicMaterial map={texture} side={THREE.DoubleSide} />
+          {/* 🔥 RESPONSIVE SIZE */}
+          <circleGeometry args={[1.5, 64]} />
+          <meshBasicMaterial 
+            map={texture} 
+            side={THREE.DoubleSide} 
+            transparent
+          />
         </mesh>
       </Float>
 
-      {/* 💻 FLOATING SYMBOLS */}
+      {/* 💻 FLOATING SYMBOLS (SPACED + CLEAN) */}
 
-      <Float speed={3.5} floatIntensity={4}>
-        <Html position={[-3, 2, 0]} transform>
-          <div className="text-primary text-2xl font-bold opacity-90">&lt;/&gt;</div>
+      <Float speed={2.5} floatIntensity={3}>
+        <Html position={[-2.5, 1.8, 0]} transform>
+          <div className="text-primary text-lg sm:text-2xl opacity-80">&lt;/&gt;</div>
         </Html>
       </Float>
 
-      <Float speed={2.2} floatIntensity={2.5}>
-        <Html position={[3, 0.5, 0]} transform>
-          <div className="text-primary text-xl opacity-70">{`{ }`}</div>
+      <Float speed={2} floatIntensity={2}>
+        <Html position={[2.5, 0.5, 0]} transform>
+          <div className="text-primary text-base sm:text-xl opacity-70">{`{ }`}</div>
         </Html>
       </Float>
 
-      <Float speed={1.8} floatIntensity={2}>
-        <Html position={[0, 3, 0]} transform>
-          <div className="text-primary text-lg opacity-60">⚛️</div>
+      <Float speed={1.6} floatIntensity={2}>
+        <Html position={[0, 2.5, 0]} transform>
+          <div className="text-primary text-base sm:text-lg opacity-60">⚛️</div>
         </Html>
       </Float>
 
-      <Float speed={2.8} floatIntensity={3}>
-        <Html position={[-2.5, -2.5, 0]} transform>
-          <div className="text-primary text-xl opacity-70">🤖</div>
+      <Float speed={2.4} floatIntensity={2.5}>
+        <Html position={[-2, -2, 0]} transform>
+          <div className="text-primary text-base sm:text-lg opacity-70">🤖</div>
+        </Html>
+      </Float>
+
+      <Float speed={2.6} floatIntensity={2.5}>
+        <Html position={[2, -1.8, 0]} transform>
+          <div className="text-primary text-sm sm:text-lg opacity-60">💻</div>
         </Html>
       </Float>
 
       <Float speed={3} floatIntensity={3}>
-        <Html position={[2.5, -2.2, 0]} transform>
-          <div className="text-primary text-lg opacity-60">💻</div>
-        </Html>
-      </Float>
-
-      <Float speed={4} floatIntensity={5}>
-        <Html position={[1.5, 2.2, 0]} transform>
-          <div className="text-primary text-sm opacity-50">🌐</div>
+        <Html position={[1.5, 1.8, 0]} transform>
+          <div className="text-primary text-xs sm:text-sm opacity-50">🌐</div>
         </Html>
       </Float>
 

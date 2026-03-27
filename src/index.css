@@ -13,10 +13,28 @@
   html {
     scroll-behavior: auto;
   }
+
+  html.light {
+  background-color: white;
+  color: black;
+}
+
+html.dark {
+  background-color: black;
+  color: white;
+}
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-600;
-  }
+  background: linear-gradient(
+    90deg,
+    var(--theme-color),
+    white,
+    var(--theme-color)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+}
+

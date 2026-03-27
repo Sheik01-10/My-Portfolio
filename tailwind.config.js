@@ -1,15 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class", // 🔥 MUST ADD THIS
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        primary: '#ff7300',
+        primary: 'var(--theme-color)',
         dark: '#0a0a0a',
       },
       animation: {
-        'float': 'float 6s ease-in-out infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
+        float: 'float 6s ease-in-out infinite',
+        glow: 'glow 2s ease-in-out infinite alternate',
       },
       keyframes: {
         float: {
