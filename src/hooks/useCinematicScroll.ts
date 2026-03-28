@@ -7,99 +7,72 @@ gsap.registerPlugin(ScrollTrigger);
 export default function useCinematicScroll(): void {
   useEffect(() => {
     const ctx = gsap.context(() => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
 
-      // 🔥 MAIN TIMELINE
-      const tl = gsap.timeline({
+      ScrollTrigger.getAll().forEach(t => t.kill());
+
+      // 🔥 HERO EXIT (CINEMATIC)
+      gsap.to("#hero", {
+        scale: 0.95,
+        opacity: 0.3,
+        filter: "blur(6px)",
         scrollTrigger: {
-          trigger: "#main-container",
+          trigger: "#hero",
           start: "top top",
-          end: "+=100", // scroll length
+          end: "bottom top",
           scrub: true,
-          pin: true,
         },
       });
 
-      // 🎬 HERO EXIT
-      tl.to("#hero", {
-        scale: 0.7,
+      // 🔥 SECTIONS ENTRY (APPLE STYLE)
+      const sections = ["#services", "#portfolio", "#about", "#contact"];
+
+      sections.forEach((sec) => {
+        gsap.from(sec, {
+          y: 120,
+          opacity: 0,
+          scale: 0.98,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sec,
+            start: "top 80%",
+            end: "top 30%",
+            scrub: true,
+          },
+        });
+      });
+
+      // 🔥 CARDS STAGGER (SUPER SMOOTH)
+      gsap.from(".portfolio-card", {
+        y: 100,
         opacity: 0,
-        filter: "blur(15px)",
-        duration: 1,
+        scale: 0.9,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#portfolio",
+          start: "top 80%",
+          scrub: true,
+        },
       });
 
-      // 🎬 SERVICES ENTRY
-      tl.fromTo(
-        "#services",
-        { y: 300, opacity: 0, rotateX: 50 },
-        { y: 0, opacity: 1, rotateX: 0, duration: 1 }
-      );
-
-      // 🎬 SERVICES HOLD
-      tl.to("#services", {
-        scale: 1,
-        duration: 0.5,
+      // 🔥 FLOATING PARALLAX (DEPTH)
+      gsap.to(".floating", {
+        y: -50,
+        scrollTrigger: {
+          trigger: "#portfolio",
+          scrub: true,
+        },
       });
 
-      // 🎬 PORTFOLIO ENTRY
-      tl.fromTo(
-        "#portfolio",
-        { y: 300, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1 }
-      );
-
-      // 🔥 PORTFOLIO STAGGER (REAL CINEMATIC)
-gsap.to(".portfolio-card", {
-  y: -50,
-  opacity: 0,
-  rotateX: 50,
-  stagger: 0.2,
-  duration: 1,
-  scrollTrigger: {
-    trigger: "#portfolio",
-    start: "top 80%",
-    end: "top 30%",
-    scrub: true,
-  },
-});
-
-      // 🔥 ABOUT SECTION CINEMATIC ENTRY
-gsap.from(".about-section", {
-  y: 200,
-  rotateX: 40,
-  opacity: 0,
-  duration: 1,
-  scrollTrigger: {
-    trigger: "#about",
-    start: "top 80%",
-    end: "top 30%",
-    scrub: true,
-  },
-});
-
-// 🔥 SKILLS STAGGER
-gsap.from(".about-card", {
-  y: 100,
-  opacity: 0,
-  rotateX: 40,
-  stagger: 0.15,
-  duration: 1,
-  scrollTrigger: {
-    trigger: "#about",
-    start: "top 70%",
-    scrub: true,
-  },
-});
-
-// 🔥 FLOATING EFFECT
-gsap.to(".about-card", {
-  y: -40,
-  stagger: 0.2,
-  scrollTrigger: {
-    trigger: "#about",
-    scrub: true,
-  },
-});
+      // 🔥 TEXT PARALLAX
+      gsap.to(".parallax-text", {
+        y: -80,
+        scrollTrigger: {
+          trigger: "#main-container",
+          scrub: true,
+        },
+      });
 
     });
 

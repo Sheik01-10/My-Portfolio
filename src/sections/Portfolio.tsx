@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Github } from 'lucide-react';
 
 export default function Portfolio() {
   const ref = useRef(null);
@@ -13,38 +13,55 @@ export default function Portfolio() {
     {
       title: 'AI Voice Assistant',
       category: 'AI',
-      description: 'Jarvis-like AI assistant with voice control & automation',
+      description: 'Jarvis-like AI assistant',
       color: 'from-orange-500 to-red-500',
+      github: "https://github.com/Sheik01-10/jarvis-ai",
     },
     {
       title: 'Training Trains App',
       category: 'Mobile',
-      description: '3D animated app using React & Three.js',
+      description: 'Seminar & certificate app',
       color: 'from-purple-500 to-pink-500',
+      github: "https://github.com/Sheik01-10/Training-Trains-App",
+      live: "https://play.google.com/store/apps/details?id=com.trainingtrains.app"
     },
     {
-      title: 'Doctor Appointment Website',
+      title: 'Sunflower Siddha Clinic Website',
       category: 'Web',
-      description: 'Book appointments & manage patients',
+      description: 'Book appointments system',
       color: 'from-green-500 to-teal-500',
+      github: "https://github.com/Sheik01-10/sunflowersiddhaclinic",
+      live: "https://sunflowersiddhaclinic.com/"
     },
     {
       title: 'Women Safety App',
       category: 'Mobile',
-      description: 'Live tracking & SOS alert system',
+      description: 'SOS alert system',
       color: 'from-yellow-500 to-orange-500',
+      github: "https://github.com/Sheik01-10/SafeHer",
     },
     {
-      title: 'Smart Budget App',
+      title: 'App Creation ',
       category: 'Mobile',
-      description: 'Expense tracking & analytics dashboard',
+      description: 'App creation using flutter this app is used to create apps with basic home page',
       color: 'from-blue-500 to-cyan-500',
+      github: "https://github.com/Sheik01-10/App-Creation-",
     },
     {
       title: 'College Club Website',
       category: 'Web',
-      description: 'Event & student platform',
+      description: 'Event platform',
       color: 'from-pink-500 to-rose-500',
+      github: "https://github.com/Sheik01-10/hackforge-club",
+      live: "https://hackforge-club.netlify.app/"
+    },
+    {
+      title: 'Shanmuga Diabetic Clinic Website',
+      category: 'Web',
+      description: 'Event platform',
+      color: 'from-pink-500 to-rose-500',
+      github: "https://github.com/Sheik01-10/doctorwebsite",
+      live: "https://shanmugadiabeticclinic.netlify.app/"
     },
   ];
 
@@ -54,84 +71,117 @@ export default function Portfolio() {
       : projects.filter((p) => p.category === activeFilter);
 
   return (
-    <section
-      id="portfolio"
-      className="py-24 sm:py-32 bg-white dark:bg-black relative overflow-hidden transition-colors duration-300"
-    >
+    <section id="portfolio" className="py-24 bg-white dark:bg-black relative overflow-hidden">
 
-      {/* 🔥 BACKGROUND */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,115,0,0.15),transparent_40%),radial-gradient(circle_at_70%_70%,rgba(255,115,0,0.1),transparent_40%)]" />
+      {/* 🔥 BACKGROUND GLOW */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,115,0,0.15),transparent_40%)]" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
+      <div className="max-w-7xl mx-auto px-4 relative z-10" ref={ref}>
 
         {/* 🔥 TITLE */}
         <motion.div
           initial={{ opacity: 0, y: 80 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12 sm:mb-20"
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-16"
         >
-          <h2 className="parallax-text text-3xl sm:text-5xl font-bold text-black dark:text-white mb-4">
+          <h2 className="text-5xl sm:text-6xl font-bold text-black dark:text-white">
             My <span className="text-primary">Portfolio</span>
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
-            Explore my latest projects and creative work
-          </p>
         </motion.div>
 
         {/* 🔥 FILTER */}
-        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-10 sm:mb-12">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveFilter(category)}
-              className={`px-4 sm:px-6 py-2 rounded-full text-sm sm:text-base transition-all ${
-                activeFilter === category
-                  ? 'bg-primary text-white shadow-lg shadow-primary/50'
-                  : 'bg-black/5 dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white'
+        <div className="flex justify-center gap-4 mb-12">
+          {categories.map((cat) => (
+            <motion.button
+              key={cat}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setActiveFilter(cat)}
+              className={`px-5 py-2 rounded-full text-sm transition ${
+                activeFilter === cat
+                  ? "bg-primary text-white shadow-lg shadow-primary/40"
+                  : "bg-black/5 dark:bg-white/5 text-gray-600 dark:text-gray-400"
               }`}
             >
-              {category}
-            </button>
+              {cat}
+            </motion.button>
           ))}
         </div>
 
-        {/* 🔥 GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
+        {/* 🔥 GRID FIX */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
 
-          {filteredProjects.map((project, index) => (
+          {filteredProjects.map((project, i) => (
             <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 80 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="group rounded-2xl overflow-hidden bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 hover:border-primary/50 transition-all cursor-pointer"
+              key={i}
+              initial={{ opacity: 0, y: 120, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{
+                delay: i * 0.15,
+                duration: 0.7,
+                ease: [0.16, 1, 0.3, 1], // 🔥 Apple easing
+              }}
+              whileHover={{
+                y: -15,
+                scale: 1.03,
+              }}
+              className="group relative rounded-3xl overflow-hidden border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 backdrop-blur-xl shadow-xl hover:shadow-2xl transition-all"
             >
 
               {/* 🔥 IMAGE */}
-              <div className={`h-40 sm:h-56 bg-gradient-to-br ${project.color} relative`}>
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                  <ExternalLink className="w-6 h-6 text-white" />
-                </div>
+              <div className={`h-52 bg-gradient-to-br ${project.color} relative`}>
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition" />
               </div>
 
               {/* 🔥 CONTENT */}
-              <div className="p-4 sm:p-6">
-                <div className="text-xs text-primary mb-2">
-                  {project.category}
-                </div>
+              <div className="p-6 space-y-3">
 
-                <h3 className="text-lg sm:text-xl font-bold text-black dark:text-white mb-2 group-hover:text-primary">
+                <span className="text-xs text-primary">
+                  {project.category}
+                </span>
+
+                <h3 className="text-xl font-semibold text-black dark:text-white group-hover:text-primary transition">
                   {project.title}
                 </h3>
 
-                <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm">
+                <p className="text-gray-600 dark:text-gray-400 text-sm">
                   {project.description}
                 </p>
+
+                {/* 🔥 BUTTONS */}
+                <div className="flex gap-3 pt-3">
+
+                  <motion.a
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    href={project.github}
+                    target="_blank"
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex items-center gap-2 px-4 py-2 border border-primary text-primary rounded-full text-sm hover:bg-primary hover:text-white transition"
+                  >
+                    <Github className="w-4 h-4" />
+                    Code
+                  </motion.a>
+
+                  <motion.a
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    href={project.live}
+                    target="_blank"
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-full text-sm shadow-md hover:shadow-lg transition"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    Live
+                  </motion.a>
+
+                </div>
+
               </div>
+
+              {/* 🔥 HOVER GLOW */}
+              <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition bg-[radial-gradient(circle,rgba(255,115,0,0.2),transparent_70%)]" />
 
             </motion.div>
           ))}
