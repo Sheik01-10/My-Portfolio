@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
 
 export default function ThemeToggle() {
-  const { mode, toggleMode } = useTheme();
+  const { appliedTheme, toggleMode } = useTheme();
   
 
   return (
@@ -14,7 +14,7 @@ export default function ThemeToggle() {
                  bg-white/10 backdrop-blur-md border border-white/20 
                  cursor-pointer"
     >
-      {mode === "dark" ? (
+      {appliedTheme === "dark" ? (
         <Moon className="w-5 h-5 text-white" />
       ) : (
         <Sun className="w-5 h-5 text-yellow-500" />
