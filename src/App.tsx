@@ -26,10 +26,10 @@ function App() {
 
         <main>
           <Hero />
-          <Services />
           <About />
           <Portfolio />
           <Certifications />
+          <Services />
           <Contact />
         </main>
 

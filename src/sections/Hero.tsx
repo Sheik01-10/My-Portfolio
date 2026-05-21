@@ -179,21 +179,26 @@ export default function Hero() {
 
           {/* 🔥 RIGHT */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-            className="h-[300px] sm:h-[400px] lg:h-[600px]"
-          >
-            <Canvas camera={{ position: [0, 0, 5] }}>
-              <ambientLight intensity={0.6} />
-              <pointLight position={[5, 5, 5]} />
-              <pointLight position={[-5, -5, -5]} color="#ff6b00" />
+  initial={{ opacity: 0, scale: 0.8 }}
+  animate={{ opacity: 1, scale: 1 }}
+  transition={{ duration: 1 }}
+  className="h-[300px] sm:h-[400px] lg:h-[600px]"
+>
+  <Canvas camera={{ position: [0, 0, 5] }}>
+    <ambientLight intensity={0.6} />
+    <pointLight position={[5, 5, 5]} />
+    <pointLight position={[-5, -5, -5]} color="#ff6b00" />
 
-              <HeroAvatar />
+    <HeroAvatar />
 
-              <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.3} />
-            </Canvas>
-          </motion.div>
+    {/* ✅ No auto rotate */}
+    <OrbitControls
+      enableZoom={false}
+      enableRotate={false}
+      enablePan={false}
+    />
+  </Canvas>
+</motion.div>
 
         </div>
       </div>

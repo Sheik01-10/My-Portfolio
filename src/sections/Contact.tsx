@@ -53,9 +53,6 @@ export default function Contact() {
           <h2 className="parallax-text text-3xl sm:text-5xl font-bold text-black dark:text-white mb-4">
             Get In <span className="text-primary">Touch</span>
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
-            Let’s build something amazing together 
-          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12">
@@ -71,9 +68,6 @@ export default function Contact() {
               <h3 className="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4">
                 Let's talk about everything!
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
-                Open for freelance & collaborations 💡
-              </p>
             </div>
 
             <div className="space-y-4 sm:space-y-6">

@@ -6,17 +6,23 @@ export default function Portfolio() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [activeFilter, setActiveFilter] = useState('All');
+  const [selectedProject, setSelectedProject] = useState<any>(null);
 
   const categories = ['All', 'Web', 'AI', 'Mobile'];
 
   const projects = [
     {
-      title: 'AI Voice Assistant',
-      category: 'AI',
-      description: 'Jarvis-like AI assistant',
-      color: 'from-orange-500 to-red-500',
-      github: "https://github.com/Sheik01-10/jarvis-ai",
-    },
+  title: 'AI Voice Assistant',
+  category: 'AI',
+  description: 'Jarvis-like AI assistant',
+  color: 'from-orange-500 to-red-500',
+  github: "https://github.com/Sheik01-10/jarvis-ai",
+  images: [
+    "/projects/jarvis/1.jpeg",
+    "/projects/jarvis/2.png",
+    "/projects/jarvis/3.png",
+  ],
+},
     {
       title: 'Training Trains App',
       category: 'Mobile',
@@ -34,19 +40,30 @@ export default function Portfolio() {
       live: "https://sunflowersiddhaclinic.com/"
     },
     {
-      title: 'Women Safety App',
-      category: 'Mobile',
-      description: 'SOS alert system',
-      color: 'from-yellow-500 to-orange-500',
-      github: "https://github.com/Sheik01-10/SafeHer",
-    },
+  title: 'Women Safety App',
+  category: 'Mobile',
+  description: 'SOS alert system',
+  color: 'from-yellow-500 to-orange-500',
+  github: "https://github.com/Sheik01-10/SafeHer",
+  images: [
+    "/projects/safeher/1.png",
+    "/projects/safeher/2.png",
+    "/projects/safeher/3.png",
+  ],
+},
     {
-      title: 'App Creation ',
-      category: 'Mobile',
-      description: 'App creation using flutter this app is used to create apps with basic home page',
-      color: 'from-blue-500 to-cyan-500',
-      github: "https://github.com/Sheik01-10/App-Creation-",
-    },
+  title: 'App Creation',
+  category: 'Mobile',
+  description:
+    'App creation using flutter this app is used to create apps with basic home page',
+  color: 'from-blue-500 to-cyan-500',
+  github: "https://github.com/Sheik01-10/App-Creation-",
+  images: [
+    "/projects/appcreation/1.png",
+    "/projects/appcreation/2.png",
+    "/projects/appcreation/3.png",
+  ],
+},
     {
       title: 'College Club Website',
       category: 'Web',
@@ -86,7 +103,7 @@ export default function Portfolio() {
           className="text-center mb-16"
         >
           <h2 className="text-5xl sm:text-6xl font-bold text-black dark:text-white">
-            My <span className="text-primary">Portfolio</span>
+            My <span className="text-primary">Projects</span>
           </h2>
         </motion.div>
 
@@ -164,17 +181,29 @@ export default function Portfolio() {
                     Code
                   </motion.a>
 
-                  <motion.a
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    href={project.live}
-                    target="_blank"
-                    onClick={(e) => e.stopPropagation()}
-                    className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-full text-sm shadow-md hover:shadow-lg transition"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    Live
-                  </motion.a>
+                  {project.images ? (
+  <motion.button
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.9 }}
+    onClick={() => setSelectedProject(project)}
+    className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-full text-sm shadow-md hover:shadow-lg transition"
+  >
+    <ExternalLink className="w-4 h-4" />
+    Live
+  </motion.button>
+) : (
+  <motion.a
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.9 }}
+    href={project.live}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-full text-sm shadow-md hover:shadow-lg transition"
+  >
+    <ExternalLink className="w-4 h-4" />
+    Live
+  </motion.a>
+)}
 
                 </div>
 
@@ -188,6 +217,39 @@ export default function Portfolio() {
 
         </div>
       </div>
+      {selectedProject && (
+  <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <motion.div
+      initial={{ scale: 0.8, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      className="relative bg-white dark:bg-zinc-900 rounded-3xl p-6 max-w-5xl w-full max-h-[90vh] overflow-y-auto"
+    >
+      <button
+        onClick={() => setSelectedProject(null)}
+        className="absolute top-4 right-5 text-2xl text-gray-500 hover:text-red-500"
+      >
+        ✕
+      </button>
+
+      <h2 className="text-3xl font-bold text-center mb-8 text-black dark:text-white">
+        {selectedProject.title} Screenshots
+      </h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+        {selectedProject.images.map(
+          (img: string, index: number) => (
+            <img
+              key={index}
+              src={img}
+              alt=""
+              className="rounded-2xl shadow-lg border border-black/10 dark:border-white/10 hover:scale-105 transition"
+            />
+          )
+        )}
+      </div>
+    </motion.div>
+  </div>
+)}
     </section>
   );
 }
